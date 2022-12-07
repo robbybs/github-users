@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Github User</string>
+    <string name="text_search">Search</string>
+    <string name="text_insert_username">Insert Username</string>
+    <string name="text_warning_input_username">Please input username first!</string>
+    <string name="text_follower">Follower</string>
+    <string name="text_following">Following</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="text_favorite">Favorite</string>
+</resources>
