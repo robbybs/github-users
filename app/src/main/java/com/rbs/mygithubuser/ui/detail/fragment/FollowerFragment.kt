@@ -16,18 +16,6 @@ import com.rbs.mygithubuser.utils.RetrofitService
 
 class FollowerFragment : Fragment(), FollowerView {
 
-    companion object {
-        const val USERNAME = "username"
-
-        fun newInstance(username: String): FollowerFragment {
-            return FollowerFragment().apply {
-                arguments = Bundle().apply {
-                    putString(USERNAME, username)
-                }
-            }
-        }
-    }
-
     private lateinit var binding: FragmentFollowerBinding
     private lateinit var presenter: FollowerPresenter
     private lateinit var username: String
@@ -82,5 +70,17 @@ class FollowerFragment : Fragment(), FollowerView {
     override fun stopLoading() {
         binding.progressLoading.visibility = View.GONE
         binding.rvUsers.visibility = View.VISIBLE
+    }
+
+    companion object {
+        const val USERNAME = "username"
+
+        fun newInstance(username: String): FollowerFragment {
+            return FollowerFragment().apply {
+                arguments = Bundle().apply {
+                    putString(USERNAME, username)
+                }
+            }
+        }
     }
 }

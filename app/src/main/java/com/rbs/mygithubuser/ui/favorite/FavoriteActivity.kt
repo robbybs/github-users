@@ -36,7 +36,7 @@ class FavoriteActivity : AppCompatActivity(), FavoriteView {
     override fun initializePresenter() {
         presenter = FavoritePresenter(application)
         presenter.attachView(this)
-        presenter.getData().observe(this, {
+        presenter.getData().observe(this) {
             user = it
             adapter = FavoriteAdapter(it)
             binding.rvUsers.adapter = adapter
@@ -57,7 +57,7 @@ class FavoriteActivity : AppCompatActivity(), FavoriteView {
                     }
                 }
             })
-        })
+        }
     }
 
     private fun initializationAdapter() {

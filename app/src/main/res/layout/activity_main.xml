@@ -40,6 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/input_search" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium"
@@ -49,6 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/input_search" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/progressLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
@@ -60,6 +62,7 @@
         app:layout_constraintTop_toBottomOf="@id/btn_search" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_users"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
