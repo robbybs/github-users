@@ -49,6 +49,17 @@
         app:layout_constraintStart_toEndOf="@id/btn_search"
         app:layout_constraintTop_toBottomOf="@id/input_search" />
 
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_theme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="@string/text_dark_mode"
+        android:textSize="@dimen/text_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_favorite"
+        app:layout_constraintTop_toBottomOf="@id/input_search" />
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progressLoading"
         android:layout_width="wrap_content"
@@ -67,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
         android:overScrollMode="never"
-        android:visibility="gone"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_search"

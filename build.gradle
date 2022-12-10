@@ -42,4 +42,5 @@ ext {
     coroutinesCoreVersion = '1.6.4'
     coroutinesAndroidVersion = '1.6.4'
     roomVersion = '2.4.3'
+    dataStoreVersion = '1.0.0'
 }

@@ -4,11 +4,17 @@ import com.rbs.mygithubuser.base.BasePresenter
 import com.rbs.mygithubuser.data.search.SearchUserResponse
 import com.rbs.mygithubuser.ui.main.view.MainView
 import com.rbs.mygithubuser.utils.ApiRequest
+import com.rbs.mygithubuser.utils.SettingPreference
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainPresenter : BasePresenter<MainView>() {
+class MainPresenter(pref: SettingPreference) : BasePresenter<MainView>() {
+
+    private var preference: SettingPreference = pref
 
     private lateinit var service: ApiRequest
 
@@ -37,5 +43,15 @@ class MainPresenter : BasePresenter<MainView>() {
                 if (isViewAttached()) getView()?.setErrorMessage(t.message.toString())
             }
         })
+    }
+
+    fun getThemeSettings(): Flow<Boolean> {
+        return preference.getThemeSetting()
+    }
+
+    fun saveThemeSetting(isDarkModeActive: Boolean) = runBlocking {
+        launch {
+            preference.saveThemeSetting(isDarkModeActive)
+        }
     }
 }
