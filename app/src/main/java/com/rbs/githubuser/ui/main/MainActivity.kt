@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
         binding.rvUsers.adapter = adapter
     }
 
-    private fun setDarkMode(mainViewModel: SearchUserViewModel) {
-        mainViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
+    private fun setDarkMode(searchViewModel: SearchUserViewModel) {
+        searchViewModel.getThemeSettings().observe(this) { isDarkModeActive: Boolean ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.switchTheme.isChecked = true
@@ -60,30 +60,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setClickToggle(mainViewModel: SearchUserViewModel) {
+    private fun setClickToggle(searchViewModel: SearchUserViewModel) {
         binding.switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 binding.switchTheme.isChecked = true
-                mainViewModel.saveThemeSetting(true)
+                searchViewModel.saveThemeSetting(true)
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 binding.switchTheme.isChecked = false
-                mainViewModel.saveThemeSetting(false)
+                searchViewModel.saveThemeSetting(false)
             }
         }
     }
 
-    private fun setClickData(mainViewModel: SearchUserViewModel) {
+    private fun setClickData(searchViewModel: SearchUserViewModel) {
         binding.btnSearch.setOnClickListener {
             val username = binding.inputSearch.editText?.text?.trim().toString()
             if (username.isNotEmpty()) {
-                mainViewModel.searchUsers(username)
+                searchViewModel.searchUsers(username)
                 binding.progressBar.visibility = View.VISIBLE
             }
         }
 
-        mainViewModel.getUser().observe(this) {
+        searchViewModel.getUser().observe(this) {
             setLoadingData()
             adapter.setData(it)
             binding.rvUsers.scrollToPosition(0)

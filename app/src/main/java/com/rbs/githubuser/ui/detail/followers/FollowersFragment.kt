@@ -31,6 +31,7 @@ class FollowersFragment : Fragment() {
         followersViewModel.getFollowers(username)
         followersViewModel.getData().observe(viewLifecycleOwner) {
             if (it != null) {
+                setLoadingData()
                 adapter.setListUsers(it)
             }
         }
@@ -41,6 +42,11 @@ class FollowersFragment : Fragment() {
         binding.rvUsers.layoutManager = LinearLayoutManager(context)
         adapter = FollowersAdapter()
         binding.rvUsers.adapter = adapter
+    }
+
+    private fun setLoadingData() {
+        binding.progressBar.visibility = View.GONE
+        binding.rvUsers.visibility = View.VISIBLE
     }
 
     companion object {

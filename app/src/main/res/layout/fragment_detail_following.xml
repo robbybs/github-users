@@ -4,17 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.followers.FollowersFragment">
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateTint="@color/purple_500"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".ui.favorite.detail.following.DetailFollowingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"
@@ -23,12 +13,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:overScrollMode="never"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_users"
-        tools:visibility="visible" />
+        tools:listitem="@layout/item_users" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

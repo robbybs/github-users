@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +13,23 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import com.rbs.githubuser.R
 import com.rbs.githubuser.data.DetailUser
+import com.rbs.githubuser.data.SearchUser
 import com.rbs.githubuser.databinding.ActivityDetailBinding
-import com.rbs.githubuser.db.DetailUserDB
+import com.rbs.githubuser.db.model.DetailUserDB
+import com.rbs.githubuser.db.model.ListFollowersUsers
+import com.rbs.githubuser.db.model.ListFollowingUsers
 
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private lateinit var username: String
+    private val detailViewModel by viewModels<DetailViewModel> {
+        DetailViewModel.ViewModelFactory.getInstance(application)
+        DetailViewModel.ViewModelFactory(application)
+    }
+
+    private var listFollowers = ArrayList<SearchUser>()
+    private var listFollowing = ArrayList<SearchUser>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +37,26 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         username = intent.getStringExtra(USERNAME).toString()
         setViewModel()
-        setPagerAdapter()
     }
 
     private fun setViewModel() {
-        val detailViewModel by viewModels<DetailViewModel> {
-            DetailViewModel.ViewModelFactory.getInstance(application)
-            DetailViewModel.ViewModelFactory(application)
-        }
-
         detailViewModel.getDetailDataByUsername(username)
         detailViewModel.getData().observe(this) {
             setLoadingData()
-            setUsersData(it, detailViewModel)
+            setUsersData(it)
         }
+
+        detailViewModel.getFollowers(username)
+        detailViewModel.getFollowersData().observe(this) {
+            listFollowers.addAll(it)
+        }
+
+        detailViewModel.getFollowing(username)
+        detailViewModel.getFollowingData().observe(this) {
+            listFollowing.addAll(it)
+        }
+
+        setPagerAdapter()
     }
 
     private fun setLoadingData() {
@@ -47,7 +64,7 @@ class DetailActivity : AppCompatActivity() {
         binding.container.visibility = View.VISIBLE
     }
 
-    private fun setUsersData(users: DetailUser, detailViewModel: DetailViewModel) {
+    private fun setUsersData(users: DetailUser) {
         setView(binding.tvName, users.name)
         setView(binding.tvUsername, users.username)
         setView(binding.tvUrl, users.url)
@@ -55,9 +72,12 @@ class DetailActivity : AppCompatActivity() {
         setImage(binding.ivAvatar, users.avatar)
 
         binding.btnFavorite.setOnClickListener {
+            val followers = ListFollowersUsers(listFollowers)
+            val following = ListFollowingUsers(listFollowing)
             val userRoom =
-                DetailUserDB(users.name, users.username, users.avatar, users.url, users.company)
+                DetailUserDB(users.name, users.username, users.avatar, users.url, users.company, followers, following)
             detailViewModel.insertData(userRoom)
+            Toast.makeText(this, getString(R.string.notification_favorite), Toast.LENGTH_SHORT).show()
         }
     }
 

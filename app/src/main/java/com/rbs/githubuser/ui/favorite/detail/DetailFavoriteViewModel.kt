@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.rbs.githubuser.db.DetailUserDB
+import com.rbs.githubuser.db.model.DetailUserDB
 import com.rbs.githubuser.db.repository.DetailUserRepository
 
 class DetailFavoriteViewModel(application: Application) : ViewModel() {

@@ -19,7 +19,7 @@ interface ApiService {
     fun getUserResponse(@Query("q") username: String): Call<SearchUserResponse>
 
     @GET("users/{username}")
-    @Headers("Authorization: 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")
+    @Headers("Authorization: token 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")
     fun getDetailUser(@Path("username") username: String): Call<DetailUser>
 
     @GET("users/{username}/followers")

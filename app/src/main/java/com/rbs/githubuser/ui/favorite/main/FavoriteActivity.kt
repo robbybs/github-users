@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rbs.githubuser.databinding.ActivityFavoriteBinding
-import com.rbs.githubuser.db.DetailUserDB
+import com.rbs.githubuser.db.model.DetailUserDB
 import com.rbs.githubuser.ui.favorite.detail.DetailFavoriteActivity
 
 class FavoriteActivity : AppCompatActivity() {
@@ -17,19 +17,17 @@ class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
     private lateinit var adapter: FavoriteAdapter
     private lateinit var listUsers: List<DetailUserDB>
+    private val favoriteViewModel by viewModels<FavoriteViewModel> {
+        FavoriteViewModel.ViewModelFactory.getInstance(application)
+        FavoriteViewModel.ViewModelFactory(application)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFavoriteBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val favoriteViewModel by viewModels<FavoriteViewModel> {
-            FavoriteViewModel.ViewModelFactory.getInstance(application)
-            FavoriteViewModel.ViewModelFactory(application)
-        }
-
         initializationAdapter()
-        setData(favoriteViewModel)
+        setData()
     }
 
     private fun initializationAdapter() {
@@ -39,7 +37,7 @@ class FavoriteActivity : AppCompatActivity() {
         binding.rvUsers.adapter = adapter
     }
 
-    private fun setData(favoriteViewModel: FavoriteViewModel) {
+    private fun setData() {
         favoriteViewModel.getAllUsers().observe(this) {
             if (it != null) {
                 setLoadingData()

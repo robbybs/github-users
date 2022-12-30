@@ -1,4 +1,4 @@
-package com.rbs.githubuser.db
+package com.rbs.githubuser.db.model
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
@@ -24,7 +24,14 @@ data class DetailUserDB(
     @ColumnInfo(name = "company")
     var company: String? = null,
 
+    @ColumnInfo(name = "followers")
+    var follower: ListFollowersUsers,
+
+    @ColumnInfo(name = "following")
+    var following: ListFollowingUsers,
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     var id: Int = 0
+
 ) : Parcelable

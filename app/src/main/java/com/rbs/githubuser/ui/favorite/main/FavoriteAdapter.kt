@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.rbs.githubuser.databinding.ItemUsersBinding
-import com.rbs.githubuser.db.DetailUserDB
-import com.rbs.githubuser.utils.DiffCallback
+import com.rbs.githubuser.db.model.DetailUserDB
+import com.rbs.githubuser.utils.DetailUserDBDiffCallback
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
 
@@ -16,8 +16,8 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.ViewHolder>() {
     private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setListUsers(listUsers: List<DetailUserDB>) {
-        val diffCallback = DiffCallback(this.listUsers, listUsers)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        val detailUserDBDiffCallback = DetailUserDBDiffCallback(this.listUsers, listUsers)
+        val diffResult = DiffUtil.calculateDiff(detailUserDBDiffCallback)
         this.listUsers.clear()
         this.listUsers.addAll(listUsers)
         diffResult.dispatchUpdatesTo(this)

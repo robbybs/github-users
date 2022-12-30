@@ -1,4 +1,4 @@
-package com.rbs.githubuser.ui.detail.followers
+package com.rbs.githubuser.ui.favorite.detail.followers
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import com.rbs.githubuser.data.SearchUser
 import com.rbs.githubuser.databinding.ItemUsersBinding
 import com.rbs.githubuser.utils.SearchUserDiffCallback
 
-class FollowersAdapter : RecyclerView.Adapter<FollowersAdapter.ViewHolder>() {
+class DetailFollowersAdapter : RecyclerView.Adapter<DetailFollowersAdapter.ViewHolder>() {
 
     private val listUsers = ArrayList<SearchUser>()
 

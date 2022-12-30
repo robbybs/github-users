@@ -1,7 +1,8 @@
-package com.rbs.githubuser.db
+package com.rbs.githubuser.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.rbs.githubuser.db.model.DetailUserDB
 
 @Dao
 interface DetailUserDao {

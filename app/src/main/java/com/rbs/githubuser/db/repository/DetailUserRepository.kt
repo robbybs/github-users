@@ -2,8 +2,8 @@ package com.rbs.githubuser.db.repository
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.rbs.githubuser.db.DetailUserDB
-import com.rbs.githubuser.db.DetailUserDao
+import com.rbs.githubuser.db.model.DetailUserDB
+import com.rbs.githubuser.db.dao.DetailUserDao
 import com.rbs.githubuser.db.RoomDB
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors

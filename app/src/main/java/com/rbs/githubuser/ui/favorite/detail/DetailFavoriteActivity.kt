@@ -6,15 +6,18 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.tabs.TabLayoutMediator
+import com.rbs.githubuser.R
 import com.rbs.githubuser.databinding.ActivityDetailFavoriteBinding
-import com.rbs.githubuser.db.DetailUserDB
-import com.rbs.githubuser.ui.detail.DetailActivity
+import com.rbs.githubuser.db.model.DetailUserDB
 
 class DetailFavoriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailFavoriteBinding
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,15 +29,17 @@ class DetailFavoriteActivity : AppCompatActivity() {
             DetailFavoriteViewModel.ViewModelFactory(application)
         }
 
-        val username = intent.getStringExtra(DetailActivity.USERNAME).toString()
+        username = intent.getStringExtra(USERNAME).toString()
+
         detailFavoriteViewModel.getData(username).observe(this) {
             setLoadingData()
             setUsersData(it)
         }
+
+        setPagerAdapter()
     }
 
     private fun setLoadingData() {
-        binding.progressBar.visibility = View.GONE
         binding.container.visibility = View.VISIBLE
     }
 
@@ -65,7 +70,22 @@ class DetailFavoriteActivity : AppCompatActivity() {
         }
     }
 
+    private fun setPagerAdapter() {
+        val favoritePagerAdapter = FavoritePagerAdapter(this, username)
+        val viewPager = binding.viewPager
+        val tabs = binding.tabLayout
+
+        binding.viewPager.adapter = favoritePagerAdapter
+        TabLayoutMediator(tabs, viewPager) { tab, position ->
+            tab.text = resources.getString(TAB_TITLES[position])
+        }.attach()
+        supportActionBar?.elevation = 0f
+    }
+
     companion object {
         const val USERNAME = "username"
+
+        @StringRes
+        private val TAB_TITLES = intArrayOf(R.string.title_followers, R.string.title_following)
     }
 }

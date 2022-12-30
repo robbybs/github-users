@@ -1,11 +1,12 @@
 package com.rbs.githubuser.db
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import com.rbs.githubuser.db.dao.DetailUserDao
+import com.rbs.githubuser.db.model.DetailUserDB
 
-@Database(entities = [DetailUserDB::class], version = 1)
+@TypeConverters(value = [CustomTypeConverter::class])
+@Database(entities = [DetailUserDB::class], version = 2)
 abstract class RoomDB : RoomDatabase() {
     abstract fun detailUserDao(): DetailUserDao
 
